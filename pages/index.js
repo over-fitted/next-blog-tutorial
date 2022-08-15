@@ -1,8 +1,19 @@
 import Head from 'next/head'
+import Link from 'next/link'
 
-export default function Home() {
+export async function getStaticProps() {
+  const allPostsData = getSortedPostsData();
+  return {
+    props: {
+      allPostsData,
+    },
+  };
+}
+
+export default function Home({ allPostsData }) {
   return (
-    <div className="container">
+    <Layout home>
+      <div className="container">
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
@@ -10,7 +21,7 @@ export default function Home() {
 
       <main>
         <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Read <Link href="/posts/first-post">This page!</Link>
         </h1>
 
         <p className="description">
@@ -205,5 +216,7 @@ export default function Home() {
         }
       `}</style>
     </div>
+    </Layout>
+    
   )
 }
